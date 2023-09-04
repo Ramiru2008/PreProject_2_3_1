@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
   <title>User By Id</title>
@@ -15,16 +14,15 @@
   </tr>
   </thead>
   <tbody>
-  <td th:text="${user.getName()}"/>
-  <td th:text="${user.getSurname()}"/>
-  <td th:text="${user.getAge()}"/>
+  <tr>
+    <td th:text="${user.getName()}"></td>
+    <td th:text="${user.getSurname()}"></td>
+    <td th:text="${user.getAge()}"></td>
   </tr>
   </tbody>
 </table>
-<a th:href="@{/users/{id}/edit(id=${user.getId()})}">Update</a>
-
-<form th:method="DELETE" th:action="@{/user/{id}(id=${user.getId()})}">
-  <input type="submit" value="Delete User"/>
+<form th:method="DELETE" th:action="@{/users/{id}(id=${user.id})}">
+  <input type="submit" value="Delete User" />
 </form>
 </body>
 </html>

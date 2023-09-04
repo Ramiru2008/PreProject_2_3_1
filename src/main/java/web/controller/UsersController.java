@@ -40,13 +40,14 @@ public class UsersController {
         model.addAttribute("user", userService.getUserById(id));
         return "edit";
     }
-    @PatchMapping ("/{id}")
+
+    @PatchMapping ("/users/{id}")
     public String editUser(@ModelAttribute("user") User user) {
         userService.edit(user);
         return "redirect:/users";
     }
 
-        @DeleteMapping("/{id}")
+        @DeleteMapping("/users/{id}")
         public String deleteUser (@PathVariable("id") Long id){
             userService.removeUserById(id);
             return "redirect:/users";
