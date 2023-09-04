@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -25,27 +24,30 @@ public class UserDAOImpl implements UserDAO {
     }
     @Override
     public List<User> getAllUsers() {
+        return em.createQuery("from User", User.class).getResultList();
         // FIXME: 28.08.2023 remove limit
-        return users.stream().limit(5).collect(Collectors.toList());
+         // return users.stream().limit(5).collect(Collectors.toList());
 
     }
 
     @Override
     @Transactional
     public void add (User user) {
-    //  user.setId((long) ++USERS_COUNT);
      em.persist(user);
-     em.close();
     }
 
     @Override
     @Transactional
-    public void removeUserById (int id) {
+    public User getUserById(Long id) {
+        return em.find(User.class, id); }
+
+    @Override
+    @Transactional
+    public void removeUserById (Long id) {
         User user = em.find(User.class, id);
         if (user != null) {
             em.remove(user);
         }
-
     }
 
     @Override

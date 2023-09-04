@@ -21,7 +21,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @PropertySource(value = {"classpath:db.properties"})
-@ComponentScan("web")
+@ComponentScan(value = "web")
 public class HibernateConfig {
     private final Environment env;
 
@@ -36,7 +36,7 @@ public class HibernateConfig {
         em.setPersistenceUnitName("myJpaPersistenceUnit");
         em.setJpaVendorAdapter(getJpaVendorAdapter());
         em.setJpaProperties(getHibernateProperties());
-        em.setPackagesToScan("web.model");
+        em.setPackagesToScan("web");
         return em;
     }
     @Bean
