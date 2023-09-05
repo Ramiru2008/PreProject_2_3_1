@@ -39,6 +39,7 @@ public class HibernateConfig {
         em.setPackagesToScan("web");
         return em;
     }
+
     @Bean
     public JpaVendorAdapter getJpaVendorAdapter() {
         JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
@@ -56,21 +57,22 @@ public class HibernateConfig {
     }
 
 
-
     public Properties getHibernateProperties() {
-            Properties properties = new Properties();
-            properties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
-            properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
-            properties.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
-            properties.put("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
-            return properties;
+        Properties properties = new Properties();
+        properties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
+        properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
+        properties.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
+        properties.put("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
+        return properties;
     }
+
     @Bean(name = "transactionManager")
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager manager = new JpaTransactionManager();
         manager.setEntityManagerFactory(entityManagerFactoryBean().getObject());
         return manager;
     }
+
     @Bean
     public EntityManager makeEntityManager(EntityManagerFactory entityManagerFactory) {
         return entityManagerFactory.createEntityManager();
